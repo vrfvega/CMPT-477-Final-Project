@@ -1,4 +1,7 @@
 function filtered_image = medianFilter(input_image, window_size)
+    % Convert input image to double precision
+    input_image = double(input_image);
+    
     % Check if the input is grayscale or RGB
     [rows, cols, channels] = size(input_image);
     
@@ -11,7 +14,7 @@ function filtered_image = medianFilter(input_image, window_size)
     padding = (window_size - 1) / 2;
     
     % Preallocate the output image
-    filtered_image = zeros(size(input_image), 'like', input_image);
+    filtered_image = zeros(size(input_image));
     
     % Apply the median filter to each channel independently
     for c = 1:channels
@@ -26,4 +29,7 @@ function filtered_image = medianFilter(input_image, window_size)
             end
         end
     end
+    
+    % Convert the filtered image back to the original data type
+    filtered_image = cast(filtered_image, 'like', input_image);
 end

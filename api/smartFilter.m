@@ -17,7 +17,7 @@ function filtered_img = smartFilter(input_image, kernel)
     filtered_img = zeros(size(input_image));
     
     % Pad the image
-    padded_image = padarray(input_image, [1 1], 'replicate');
+    padded_image = padarray(input_image, [1 1], 'symmetric');
     
     % Apply the smart filter to each channel independently
     for c = 1:channels

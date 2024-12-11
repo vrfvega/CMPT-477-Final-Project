@@ -1,4 +1,4 @@
-function corrupted_image = addImpulseNoise(image, noise_type, corruption_rate)
+function corrupted_image = addImpulseNoise(image, corruption_rate)
     % Get the dimensions of the image
     [rows, cols, channels] = size(image);
 
@@ -22,19 +22,8 @@ function corrupted_image = addImpulseNoise(image, noise_type, corruption_rate)
         r = row_indices(i);
         c = col_indices(i);
 
-        if strcmp(noise_type, 'random')
-            % Random impulse noise: Assign random values in the range [0, 255]
-            corrupted_pixel_value = randi([0, 255], 1, 1, channels);
-            corrupted_image(r, c, :) = corrupted_pixel_value;
-        elseif strcmp(noise_type, 'salt-and-pepper')
-            % Salt-and-pepper noise: Assign either 0 (pepper) or 255 (salt) randomly
-            if rand < 0.5
-                corrupted_image(r, c, :) = 0;  % Pepper noise
-            else
-                corrupted_image(r, c, :) = 255; % Salt noise
-            end
-        else
-            error('Unknown noise type. Use "random" or "salt-and-pepper".');
-        end
+        % Random impulse noise: Assign random values in the range [0, 255]
+        corrupted_pixel_value = randi([0, 255], 1, 1, channels);
+        corrupted_image(r, c, :) = corrupted_pixel_value;
     end
 end
